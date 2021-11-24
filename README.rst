@@ -1,19 +1,24 @@
-# RelationDB
+RelationDB
+==========
 
 RelationDB is an attempt at a modular database of objects that are taggable and support relations.
 
-## Development notes
+Development notes
+-----------------
 
-### Dependencies
+Dependencies
+^^^^^^^^^^^^
 
 - ``peewee``
 
-### Dependency handling + virtualenv
+Dependency handling + virtualenv
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - currently using ``virtualenv venv``
 - consider using poetry
 
-## Goal
+Goal
+----
 
 There are technically several goals that I'm trying to achieve with this project, however, I want to put a lot of effort into making the project as modular and customisable as possible, so that it can have a wide variety of use cases.
 
@@ -23,7 +28,8 @@ My secondary goal is to be able to use this as a database for people - a contact
 
 I'm not expecting to be able to realise everything I've set out to do, however, my intention is to get as close as possible.
 
-### Checklist
+Checklist
+^^^^^^^^^
 
 - [ ] a modular front-end
 	- [ ] shell

@@ -2,12 +2,15 @@ import relationdb
 from relationdb.models import initialise, Tag, TagHiearchy
 from relationdb import __version__
 
+import toml
+
 
 def test_version():
-    assert __version__ == '0.0.1'
+    assert __version__ == toml.load('pyproject.toml')[
+        'tool']['poetry']['version']
 
 
-def test_basic_xd():
+def test_basic_tag_manipulation():
     # AUTOMATIC DELETION AND RE-INITIALISATION OF THE DATABASE #
     # FIXME: this is bad
     import os

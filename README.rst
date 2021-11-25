@@ -9,13 +9,10 @@ Development notes
 Dependencies
 ^^^^^^^^^^^^
 
-- ``peewee``
+This project uses ``poetry`` for dependency management.
 
-Dependency handling + virtualenv
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-- currently using ``virtualenv venv``
-- consider using poetry
+	.. include:: pyproject.toml
+		:code: toml
 
 Goal
 ----

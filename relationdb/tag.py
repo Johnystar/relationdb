@@ -1,3 +1,7 @@
+"""
+Tag utilities
+"""
+
 from .models import Tag
 
 

@@ -2,7 +2,7 @@
 name = "relationdb"
 version = "0.1.0"
 description = ""
-authors = ["Johnystar <honzik@stefek.cz>"]
+authors = ["Johnystar <johnystar@pm.me>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"

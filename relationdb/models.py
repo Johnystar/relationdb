@@ -2,22 +2,8 @@
 Defines database models
 """
 
-from peewee import SqliteDatabase, Model, TextField, ForeignKeyField
-
-db = SqliteDatabase("objects.db", pragmas={"foreign_keys": 1})
-
-
-class BaseModel(Model):
-    """
-    (base database model)
-    """
-
-    class Meta:
-        """
-        (meta configuration for peewee)
-        """
-
-        database = db
+from peewee import TextField, ForeignKeyField
+from .base_model import db, BaseModel
 
 
 class Object(BaseModel):
@@ -49,3 +35,7 @@ class TagHiearchy(BaseModel):
 
     class Meta:
         indexes = ((("parent", "child"), True),)
+
+
+def initialise():
+    db.create_tables((Object, Tag, TagHiearchy))

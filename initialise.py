@@ -1,7 +1,7 @@
-from main import *
+"""
+Initialises a new database
+"""
 
-db.create_tables((
-	Object,
-	Tag,
-	TagHiearchy
-))
+from relationdb.models import Object, Tag, TagHiearchy, db
+
+db.create_tables((Object, Tag, TagHiearchy))

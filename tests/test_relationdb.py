@@ -43,8 +43,13 @@ def test_basic_object_manipulation():
     initialise()
     ############################################################
 
-    file = Object(refference='/home/user/Documents/unorganised/file.txt')
+    example_ref = '/home/user/Documents/unorganised/file.txt'
+
+    file = Object(refference=example_ref)
     file.save()
 
     tag_parents = [x.refference for x in relationdb.object.get_objects()]
-    assert tag_parents == ['/home/user/Documents/unorganised/file.txt']
+    assert tag_parents == [example_ref]
+
+    assert relationdb.object.get_object_by_refference(
+        example_ref).refference == example_ref

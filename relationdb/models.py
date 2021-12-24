@@ -6,6 +6,14 @@ from peewee import TextField, ForeignKeyField
 from .base_model import db, BaseModel
 
 
+class Tag(BaseModel):
+    """
+    A tag that can be used to tag tracked objects
+    """
+
+    name = TextField()
+
+
 class Object(BaseModel):
     """
     A tracked object
@@ -13,13 +21,9 @@ class Object(BaseModel):
 
     refference = TextField()
 
-
-class Tag(BaseModel):
-    """
-    A tag that can be used to tag tracked objects
-    """
-
-    name = TextField()
+    def add_tag(self, tag: Tag):
+        new_tag_relation = ObjectTag(object=self, tag=tag)
+        new_tag_relation.save()
 
 
 # separate table, so that
@@ -37,5 +41,10 @@ class TagHiearchy(BaseModel):
         indexes = ((("parent", "child"), True),)
 
 
+class ObjectTag(BaseModel):
+    object = ForeignKeyField(Object, backref="tags")
+    tag = ForeignKeyField(Tag, backref="objects")
+
+
 def initialise():
-    db.create_tables((Object, Tag, TagHiearchy))
+    db.create_tables((Object, Tag, TagHiearchy, ObjectTag))

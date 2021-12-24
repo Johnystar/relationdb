@@ -53,3 +53,32 @@ def test_basic_object_manipulation():
 
     assert relationdb.object.get_object_by_refference(
         example_ref).refference == example_ref
+
+
+def test_core_find_object_by_tag():
+    # AUTOMATIC DELETION AND RE-INITIALISATION OF THE DATABASE #
+    # FIXME: this is bad
+    import os
+    if os.path.exists('objects.db'):
+        os.remove('objects.db')
+
+    initialise()
+    ############################################################
+
+    video_tag = Tag(name='video')
+    video_tag.save()
+
+    media_tag = Tag(name='media')
+    media_tag.save()
+
+    TagHiearchy(parent=media_tag, child=video_tag).save()
+
+    example_ref = '/home/user/Videos/unorganised/file.mkv'
+
+    file = Object(refference=example_ref)
+    file.save()
+    file.add_tag(video_tag)
+
+    assert relationdb.object.get_objects_by_tags(
+        [video_tag])[0].refference == file.refference
+    assert relationdb.object.get_objects_by_tags([video_tag])[0] == file

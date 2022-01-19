@@ -12,8 +12,18 @@ def get_objects() -> list[Object]:
     return list(Object().select())  # FIXME: sort by tags
 
 
-def get_object_by_refference(refference: str) -> Union[Object, None]:
-    x = list(Object.select().where(Object.refference == refference))
+def get_object_by_reference(reference: str) -> Union[Object, None]:
+    x = list(Object.select().where(Object.reference == reference))
+
+    assert len(x) < 2
+
+    if len(x) == 0:
+        return None
+    return x[0]
+
+
+def get_object_by_id(id: int) -> Union[Object, None]:
+    x = list(Object.select().where(Object.id == id))
 
     assert len(x) < 2
 
@@ -38,7 +48,7 @@ def get_objects_by_tags(tags: Iterable[Union[str, Tag]]) -> list[Object]:
                 'tag is neither str or Tag - shouldn\'t be possible')
 
     result = Object.select().join(ObjectTag).join(Tag).where(Tag.id.in_(
-        processed_tags)).group_by(Object.refference).having(
+        processed_tags)).group_by(Object.reference).having(
             pw.fn.Count() == len(processed_tags))
 
     return list(result)

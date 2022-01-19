@@ -11,7 +11,7 @@ class Tag(BaseModel):
     A tag that can be used to tag tracked objects
     """
 
-    name = TextField()
+    name = TextField(unique=True)
 
 
 class Object(BaseModel):
@@ -19,7 +19,7 @@ class Object(BaseModel):
     A tracked object
     """
 
-    refference = TextField()
+    reference = TextField(unique=True)
 
     def add_tag(self, tag: Tag):
         new_tag_relation = ObjectTag(object=self, tag=tag)
@@ -42,8 +42,15 @@ class TagHiearchy(BaseModel):
 
 
 class ObjectTag(BaseModel):
+    # FIXME: make pairs unique
+
     object = ForeignKeyField(Object, backref="tags")
     tag = ForeignKeyField(Tag, backref="objects")
+
+    class Meta:
+        indexes = (
+            (('object', 'tag'), True),
+        )
 
 
 def initialise():

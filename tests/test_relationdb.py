@@ -45,14 +45,14 @@ def test_basic_object_manipulation():
 
     example_ref = '/home/user/Documents/unorganised/file.txt'
 
-    file = Object(refference=example_ref)
+    file = Object(reference=example_ref)
     file.save()
 
-    tag_parents = [x.refference for x in relationdb.object.get_objects()]
+    tag_parents = [x.reference for x in relationdb.object.get_objects()]
     assert tag_parents == [example_ref]
 
-    assert relationdb.object.get_object_by_refference(
-        example_ref).refference == example_ref
+    assert relationdb.object.get_object_by_reference(
+        example_ref).reference == example_ref
 
 
 def test_core_find_object_by_tag():
@@ -75,10 +75,10 @@ def test_core_find_object_by_tag():
 
     example_ref = '/home/user/Videos/unorganised/file.mkv'
 
-    file = Object(refference=example_ref)
+    file = Object(reference=example_ref)
     file.save()
     file.add_tag(video_tag)
 
     assert relationdb.object.get_objects_by_tags(
-        [video_tag])[0].refference == file.refference
+        [video_tag])[0].reference == file.reference
     assert relationdb.object.get_objects_by_tags([video_tag])[0] == file
